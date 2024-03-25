@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Object</title>
+    <style>
+        .row {
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 20px;
+        }
+
+        .d {
+            height: 250px;
+            width: 250px;
+            border-radius: 3px;
+            border: 1px solid rgb(179, 176, 176);
+        }
+
+        .container h1 {
+            width: 400px;
+            position: relative;
+            left: 50px;
+        }
+
+        .imgDiv {
+            height: 170px;
+        }
+
+        .imgDiv img {
+            height: 170px;
+        }
+
+        .content {
+            height: 60px;
+            position: relative;
+            top: 10px;
+        }
+
+        .content h3 {
+            text-align: center;
+            position: relative;
+            top: -10px;
+            color: #233d7b;
+        }
+
+        #compareTable {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #compareTable th,
+        #compareTable td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        #compareTable th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="text-align:  center;"><u> Compare Mobiles Specification and Price </u></h1>
+    <div class="container">
+
+        <div class="row" id="Mobiles">
+            <!-- Dropdown buttons for selecting cars to compare -->
+            <select id="mobile1">
+                <option value="">Select 1st</option>
+            </select>
+            <select id="mobile2">
+                <option value="">Select 2nd</option>
+            </select>
+        </div>
+
+        <!-- Table for comparing selected cars -->
+        <table id="compareTable">
+
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td id="mobile1Name"></td>
+                    <td id="mobile2Name"></td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td id="mobile1Price"></td>
+                    <td id="mobile2Price"></td>
+                </tr>
+                <tr>
+                    <td>Images</td>
+                    <td id="mobile1Image"></td>
+                    <td id="mobile2Image"></td>
+                </tr>
+                <!-- Add more attributes here as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let arraymobile1 = [
+            { cName: "Toyota Corolla", cPrice: 900000, cImage: "img/car1.jpg" },
+            { cName: "Honda City", cPrice: 500000, cImage: "img/car2.jpg" },
+            { cName: "Toyota Corolla", cPrice: 9600000, cImage: "img/car3.png" },
+            { cName: "Mercedes", cPrice: 9100000, cImage: "img/car4.jpg" }
+        ];
+
+        let arraymobile2 = [
+            { cName: "Toyota Corolla 2025", cPrice: 900000, cImage: "img/car1.jpg" },
+            { cName: "Honda City 2025", cPrice: 500000, cImage: "img/car2.jpg" },
+            { cName: "Toyota Corolla 2025", cPrice: 9600000, cImage: "img/car3.png" },
+            { cName: "Mercedes 2025", cPrice: 9100000, cImage: "img/car4.jpg" }
+        ];
+
+                let row1 = document.querySelector("#Mobiles");
+        let col1 = "";
+        for (i = 0; i < arraymobile1.length; i++) {
+            // Dynamically populate dropdown options with car names
+            col1 += `<option value="${i}">${arraymobile1[i].cName}</option>`;
+        }
+        // Populate dropdown 1
+        document.getElementById('mobile1').innerHTML += col1;
+
+        let col2 = "";
+        for (i = 0; i < arraymobile2.length; i++) {
+            // Dynamically populate dropdown options with car names from arraymobile2
+            col2 += `<option value="${i}">${arraymobile2[i].cName}</option>`;
+        }
+        // Populate dropdown 2
+        document.getElementById('mobile2').innerHTML += col2;
+
+        // Function to update comparison table based on selected cars
+        function updateComparison() {
+            let mobile1Index = document.getElementById('mobile1').value;
+            let mobile2Index = document.getElementById('mobile2').value;
+
+            // Update table with selected car information
+            document.getElementById('mobile1Name').textContent = arraymobile1[mobile1Index].cName;
+            document.getElementById('mobile1Price').textContent = arraymobile1[mobile1Index].cPrice;
+            document.getElementById('mobile2Name').textContent = arraymobile2[mobile2Index].cName;
+            document.getElementById('mobile2Price').textContent = arraymobile2[mobile2Index].cPrice;
+            document.getElementById('mobile1Image').innerHTML = `<img src="${arraymobile1[mobile1Index].cImage}" alt="${arraymobile1[mobile1Index].cName}">`;
+            document.getElementById('mobile2Image').innerHTML = `<img src="${arraymobile2[mobile2Index].cImage}" alt="${arraymobile2[mobile2Index].cName}">`;
+        }
+
+        // Event listener for dropdown changes
+        document.getElementById('mobile1').addEventListener('change', updateComparison);
+        document.getElementById('mobile2').addEventListener('change', updateComparison);
+    </script>
+</body>
+
+</html>
+<!-- LATEST MONDAY 29 -->
